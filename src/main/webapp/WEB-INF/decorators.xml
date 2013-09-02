@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/layout/">
+
+    <decorator name="private" page="private_layout.jsp">
+        <pattern>/private*</pattern>
+    </decorator>
+
+    <decorator name="public" page="public_layout.jsp">
+        <pattern>/public*</pattern>
+        <pattern>/</pattern>
+    </decorator>
+
+</decorators>
