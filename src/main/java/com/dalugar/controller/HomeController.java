@@ -31,6 +31,16 @@ public class HomeController {
 		return "/private/rock_loco";
 	}
 	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String displayLogin(Model model) {
+		return "/public/login";
+	}
+	
+	@RequestMapping(value = "/admin/rock", method = RequestMethod.GET)
+    public String displayAdmin(Model model) {
+		return "/private/rock_loco";
+	}
+		
 	@ModelAttribute
 	public FormDTO createFormBean() {
 		return new FormDTO();

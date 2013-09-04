@@ -5,26 +5,22 @@
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-    <http access-denied-page="/accessDenied" use-expressions="true">
+    <http access-denied-page="/accessDenied" use-expressions="true" auto-config="true">
         <intercept-url pattern="/access-denied*" access="hasAnyRole('ROLE_LOCATION_WRITE','ROLE_POLYGON_WRITE')" />
-        <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/private/**" access="hasAnyRole('ROLE_USER')" />
         <intercept-url pattern="/organization/**" access="hasAnyRole('ROLE_ORGANIZATION')" />
         <intercept-url pattern="/location/edit*" access="hasAnyRole('ROLE_LOCATION_WRITE')" />
         <intercept-url pattern="/location/view*" access="permitAll" />
 
-        <intercept-url pattern="/login*" access="isAnonymous()" />
+        <intercept-url pattern="/login**" access="isAnonymous()" />
         <intercept-url pattern="/register*" access="isAnonymous()" />
-        <intercept-url pattern="/login-denied/**" access="isAnonymous()" />
+        <intercept-url pattern="/login-denied/*s*" access="isAnonymous()" />
 
-        <intercept-url pattern="/**" access="permitAll" />
-
-        <form-login login-page='/login.html' default-target-url="/" 
+        <form-login login-page='/login' default-target-url="/" 
                     always-use-default-target="false" 
-                    authentication-failure-url="/login.html?error=true" />
+                    authentication-failure-url="/login?error=true" />
 
-        <logout />
-
-        <anonymous />
 
         <session-management invalid-session-url="/">
             <concurrency-control max-sessions="1" />
@@ -33,7 +29,14 @@
     </http>
 
     <authentication-manager alias="authenticationManager" erase-credentials="false">
-        <authentication-provider ref="restAuthenticationProvider" />
+	    <authentication-provider>
+	        <user-service>
+	            <user name="rod" password="asd" authorities="ROLE_SUPERVISOR, ROLE_USER, ROLE_TELLER" />
+	            <user name="dianne" password="asd" authorities="ROLE_USER,ROLE_TELLER" />
+	            <user name="scott" password="asd" authorities="ROLE_USER" />
+	            <user name="peter" password="asd" authorities="ROLE_USER" />
+	        </user-service>
+	    </authentication-provider>
     </authentication-manager>
 
 </beans:beans>
