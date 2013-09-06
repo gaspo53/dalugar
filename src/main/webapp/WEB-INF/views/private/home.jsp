@@ -1,2 +1,2 @@
-<%@  include file="/WEB-INF/common/taglibs.jsp" %>
+<%@  include file="/WEB-INF/views/common/taglibs.jsp" %>
 HOLA PRIVATE

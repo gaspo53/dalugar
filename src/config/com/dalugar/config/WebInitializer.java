@@ -1,12 +1,7 @@
 package com.dalugar.config;
 
 
-import javax.servlet.Filter;
-
-import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import com.opensymphony.sitemesh.webapp.SiteMeshFilter;
 
 /**
  * http://static.springsource.org/spring-framework/docs/3.2.0.RELEASE/spring-framework-reference/html/mvc.html#mvc-container-config
@@ -31,11 +26,4 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		return new String[] { "/" };
 	}
 	
-	@Override
-	protected Filter[] getServletFilters() {
-		
-		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-		characterEncodingFilter.setEncoding("UTF-8");
-		return new Filter[] { characterEncodingFilter, new SiteMeshFilter()};
-	}
 }

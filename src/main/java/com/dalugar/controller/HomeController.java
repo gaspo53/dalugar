@@ -14,31 +14,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.dalugar.dto.FormDTO;
 
 @Controller
-public class HomeController {
+public class HomeController extends CommonController {
 
 	@RequestMapping(value = {"/","/public"}, method = RequestMethod.GET)
     public String displayPublicHome(Model model) {
-		return "/public/home";
+		return "public/main/home";
 	}
 	
 	@RequestMapping(value = "/private", method = RequestMethod.GET)
     public String displayPrivateHome(Model model) {
-		return "/private/home";
-	}
-	
-	@RequestMapping(value = "/private/elRockLoco", method = RequestMethod.GET)
-    public String displayPrivateRock(Model model) {
-		return "/private/rock_loco";
+		return "private/home";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String displayLogin(Model model) {
-		return "/public/login";
-	}
-	
-	@RequestMapping(value = "/admin/rock", method = RequestMethod.GET)
-    public String displayAdmin(Model model) {
-		return "/private/rock_loco";
+		return "public/main/login";
 	}
 		
 	@ModelAttribute
@@ -48,8 +38,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method=RequestMethod.POST)
 	public String submitMessage(@Valid FormDTO formDTO, BindingResult result,
-								SessionStatus sessionStatus,
-								RedirectAttributes redirectAttrs) {
+								SessionStatus sessionStatus, RedirectAttributes redirectAttrs) {
 		
 		if (result.hasErrors()) {
 			return "/public/home";
